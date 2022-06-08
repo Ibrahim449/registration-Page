@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login form using SCSS</title>
+	<meta charset="utf-8">
+	<meta charset=UTF-8>
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300i,400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="center-item">
+		<form>
+			<h1>Register</h1>
+
+			<div class="select-group">
+
+				<label for="button">Select Country</label>
+				<button id="button" class="button">
+					<span id="select-label" class="choose">Select Country</span>
+					<div id="arrow" class="arrow"></div>
+				</button>
+
+				<div class="dropdown hidden" id="dropdown">
+					<input type="radio" id="India" name="where" value="India" class="option">
+					<label for="India" class="select-item">India</label>
+
+					<input type="radio" id="Austrelia" name="where" value="Austrelia" class="option">
+					<label for="Austrelia" class="select-item">Austrelia</label>
+
+					<input type="radio" id="Bahrain" name="where" value="Bahrain" class="option">
+					<label for="Bahrain" class="select-item">Bahrain</label>
+
+					<input type="radio" id="Belgium" name="where" value="Belgium" class="option">
+					<label for="Belgium" class="select-item">Belgium</label>
+
+					<input type="radio" id="Canada" name="where" value="Canada" class="option">
+					<label for="Canada" class="select-item">Canada</label>
+
+					<input type="radio" id="Croatia" name="where" value="Croatia" class="option">
+					<label for="Croatia" class="select-item">Croatia</label>
+
+					<input type="radio" id="Denmark" name="where" value="Denmark" class="option">
+					<label for="Denmark" class="select-item">Denmark</label>
+
+					<input type="radio" id="France" name="where" value="France" class="option">
+					<label for="France" class="select-item">France</label>
+
+					<input type="radio" id="Germany" name="where" value="Germany" class="option">
+					<label for="Germany" class="select-item">Germany</label>
+				</div>
+
+			</div>
+
+			<label>Legal First Name</label>
+			<input type="text" id="Fname" required>
+			<label>Legal Last Name</label>
+			<input type="text" id="Lname" required>
+			<label>Phone Number</label>
+			<div class="content">
+				<input type="phone" id="phonId" class="phone" value="+91">
+				<input type="number" id="phoneNumber" class="phoneNum" required>
+			</div>
+			<button type="submit" onclick="enable()" id="verifyBtn">verify Now</button>
+			<!-- <p>Not Registered ?<a href="#">Create account Now!</a></p> -->
+		</form>
+	</div>
+
+	<script>
+		const button = document.querySelector('#button');
+		const select = document.querySelector("#dropdown");
+		const options = document.querySelectorAll(".option");
+		const selectLabel = document.querySelector('#select-label');
+
+		button.addEventListener("click", function (e) {
+			e.preventDefault();
+			toggleHidden();
+		});
+
+		function toggleHidden() {
+			select.classList.toggle("hidden");
+		}
+
+		options.forEach(function (option) {
+			option.addEventListener("click", function (e) {
+				setSelectTitle(e);
+			});
+		});
+
+		function setSelectTitle(e) {
+			const labelElement = document.querySelector(`label[for="${e.target.id}"]`).innerText;
+			selectLabel.innerText = labelElement;
+			console.log(labelElement)
+			const mobId = document.getElementById("phonId");
+			if (labelElement == "Austrelia") {
+				mobId.value = "+61";
+			} else if (labelElement == "Bahrain") {
+				mobId.value = "+973";
+			} else if (labelElement == "Belgium") {
+				mobId.value = "+32";
+			} else if (labelElement == "Canada") {
+				mobId.value = "+1";
+			} else if (labelElement == "Croatia") {
+				mobId.value = "+385"
+			} else if (labelElement == "Denmark") {
+				mobId.value = "+45"
+			} else if (labelElement == "France") {
+				mobId.value = "+33"
+			} else if (labelElement == "Germany") {
+				mobId.value = "+49"
+			} else if (labelElement == "India") {
+				mobId.value = "+91";
+			}
+			toggleHidden();
+		};
+
+		function enable() {
+			// e.preventDefault();
+
+			const Fname = document.getElementById("Fname");
+			const Lname = document.getElementById("Lname");
+			const phoneNumber = document.getElementById("phoneNumber");
+
+			console.log(Fname.value);
+
+			const submitBtn = document.getElementById("verifyBtn");
+
+			if(Fname.value == "" && Lname.value == ""  && phoneNumber.value == "") {
+				submitBtn.disabled = true;
+				// submitBtn.style.opacity = "0.4";
+				// alert("please fill the form")
+				
+			} else {
+				submitBtn.disabled = false;
+				submitBtn.style.opacity = "1";
+				// alert("your application is submitted");
+			}
+		}
+	</script>
+</body>
+
+</html>
